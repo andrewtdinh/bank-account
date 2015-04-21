@@ -38,7 +38,7 @@ html(lang='en', ng-app='bank-account')
                 th Amount
                 th Date
             tbody
-              tr(ng-repeat='deposit in deposits')
+              tr(ng-repeat='deposit in deposits', ng-click='removeDeposit($index)')
                 td {{deposit.amount | currency}}
                 td {{deposit.date | date:'HH:mm:ss'}}
         .col-xs-4
@@ -49,7 +49,7 @@ html(lang='en', ng-app='bank-account')
                 th Amount
                 th Date
             tbody
-              tr(ng-repeat='withdraw in withdraws')
+              tr(ng-repeat='withdraw in withdraws', ng-click='removeWithdraw($index)')
                 td {{withdraw.amount | currency}}
                 td {{withdraw.date | date:'HH:mm:ss'}}
         .col-xs-4
@@ -60,7 +60,7 @@ html(lang='en', ng-app='bank-account')
                 th Amount
                 th Date
             tbody
-              tr(ng-repeat='fee in fees')
+              tr(ng-repeat='fee in fees', ng-click='removeFee($index)')
                 td {{fee.amount | currency}}
                 td {{fee.date | date:'HH:mm:ss'}}
 

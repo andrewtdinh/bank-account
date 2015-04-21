@@ -24,4 +24,17 @@ angular.module('bank-account', ['firebase'])
     $rootScope.balance -= $scope.amount + fee;
     $scope.withdraws.push({amount:$scope.amount, date:new Date()});
   };
+  $scope.removeDeposit = function(index){
+    $scope.deposits.splice(index, 1);
+    $rootScope.balance -= this.deposit.amount;
+  };
+  $scope.removeWithdraw = function(index){
+    $scope.withdraws.splice(index, 1);
+    $rootScope.balance += this.withdraw.amount;
+  };
+  $scope.removeFee = function(index){
+    $scope.fees.splice(index, 1);
+    $rootScope.balance += this.fee.amount;
+  };
+
 }]);
