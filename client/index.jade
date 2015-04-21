@@ -1,18 +1,68 @@
 doctype html
-html(lang='en', ng-app='poseidon')
+html(lang='en', ng-app='bank-account')
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1')
-    title Poseidon
+    title Bank Account
     link(rel='stylesheet', href='http://maxcdn.bootstrapcdn.com/bootswatch/3.3.4/superhero/bootstrap.min.css')
     link(rel='stylesheet', href='/vendor/font-awesome/css/font-awesome.min.css')
     link(rel='stylesheet', href=isProd ? '/index.min.css' : '/index.css')
     link(rel='shortcut icon', href='/favicon.ico')
-  body
+  body(ng-controller='master')
     .container-fluid
-      .row-xs-12
-        h1 Poseidon
+      .row
+        .col-xs-12
+          h1 Bank Account
+      .row
+        .col-xs-6
+          h4 User : {{name}}
+        .col-xs-6
+          h4 Balance : {{balance | currency}}
+      .row
+        .col-xs-4
+          form(name='transaction', novalidate)
+            .form-group
+              label(for='amount') Amount
+              input.form-control#amount(name='amount', type='number', ng-model='amount')
+            .form-group
+              button.btn.btn-primary(ng-click='deposit()') Deposit
+              button.btn.btn-danger(ng-click='withdraw()') Withdraw
+        .col-xs-8
+      .row
+        .col-xs-4
+          h4 Deposits
+          table.table.table-striped
+            thead
+              tr
+                th Amount
+                th Date
+            tbody
+              tr(ng-repeat='deposit in deposits')
+                td {{deposit.amount | currency}}
+                td {{deposit.date | date:'HH:mm:ss'}}
+        .col-xs-4
+          h4 Withdraws
+          table.table.table-striped
+            thead
+              tr
+                th Amount
+                th Date
+            tbody
+              tr(ng-repeat='withdraw in withdraws')
+                td {{withdraw.amount | currency}}
+                td {{withdraw.date | date:'HH:mm:ss'}}
+        .col-xs-4
+          h4 Fees
+          table.table.table-striped
+            thead
+              tr
+                th Amount
+                th Date
+            tbody
+              tr(ng-repeat='fee in fees')
+                td {{fee.amount | currency}}
+                td {{fee.date | date:'HH:mm:ss'}}
 
     script(src='/vendor/jquery/dist/jquery.min.js')
     script(src='/vendor/bootstrap/dist/js/bootstrap.min.js')
